@@ -4,19 +4,13 @@ from sklearn.metrics import accuracy_score
 import graphviz
 import pandas as pd
 from time import time
-from copy import copy, deepcopy
-
-# X = [[15, 1, 0], [20, 3, 1], [25, 2, 0], [30, 4, 0], [35, 2, 1], [25, 4, 0], [15, 2, 1], [20, 3, 1]]
-# y = [0, 1, 0, 0, 1, 0, 1, 1]
-# X_test = [[10, 2, 0], [20, 1, 1], [30, 3, 0], [40, 2, 1], [15, 1, 1]]
-# y_true = [1, 0, 1, 1, 0]
 
 data = pd.read_csv('./data/winequality-red.csv')
 feature_names = list(data.columns)[:-1]
 class_names = ['not good', 'good']
 
 y = [int(x >= 6) for x in data['quality']]
-X = deepcopy(data.drop(columns = ['quality']))
+X = data.drop(columns = ['quality'])
 
 X, X_test, y, y_true = train_test_split(X, y, random_state = 7)
 
