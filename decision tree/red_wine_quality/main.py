@@ -23,7 +23,7 @@ end = time()
 y_pred = clf.predict(X_test)
 
 accuracy = accuracy_score(y_true, y_pred)
-print(y_pred)
+print('Prediction: ', y_pred)
 print('Accuracy: ' + str(accuracy))
 
 tree.plot_tree(clf)
