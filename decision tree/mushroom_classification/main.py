@@ -24,31 +24,32 @@ class_names = ['p', 'e']
 y = [x for x in data['class']]
 X = data.drop(columns = ['class'])
 
-X, X_test, y, y_true = train_test_split(X, y, random_state = 7)
+for random_state in range(20):
+	X, X_test, y, y_true = train_test_split(X, y, random_state=random_state)
 
-clf = tree.DecisionTreeClassifier()
-start = time()
-clf = clf.fit(X, y)
-end = time()
+	clf = tree.DecisionTreeClassifier()
+	start = time()
+	clf = clf.fit(X, y)
+	end = time()
 
 
-y_pred = clf.predict(X_test)
+	y_pred = clf.predict(X_test)
 
-accuracy = accuracy_score(y_true, y_pred)
-print('Prediction: ', y_pred)
-print('Accuracy: ' + str(accuracy))
+	accuracy = accuracy_score(y_true, y_pred)
+	print('Prediction: ', y_pred)
+	print('Accuracy: ' + str(accuracy))
 
-tree.plot_tree(clf)
+	tree.plot_tree(clf)
 
-dot_data = tree.export_graphviz(clf, out_file=None,
-	feature_names=feature_names,
-	class_names=class_names,
-	filled=True, rounded=True, special_characters=True)
-graph = graphviz.Source(dot_data)
-graph.render('./model/tree_' + str(start))
+	dot_data = tree.export_graphviz(clf, out_file=None,
+		feature_names=feature_names,
+		class_names=class_names,
+		filled=True, rounded=True, special_characters=True)
+	graph = graphviz.Source(dot_data)
+	graph.render('./model/' + str(start) + '_accuracy_' + str(accuracy) + '_model')
 
-train = pd.DataFrame({**X, "class": y})
-train.to_csv('./log/train_time_' + str(start) + '_accuracy_' + str(accuracy) + '.csv', index=True)
+	train = pd.DataFrame({**X, "class": y})
+	train.to_csv('./log/' + str(start) + '_accuracy_' + str(accuracy) + '_train.csv', index=True)
 
-result = pd.DataFrame({**X_test, "true class": y_true, "predicted class": y_pred})
-result.to_csv('./log/test_time_' + str(start) + '_accuracy_' + str(accuracy) + '.csv', index=True)
+	result = pd.DataFrame({**X_test, "true class": y_true, "predicted class": y_pred})
+	result.to_csv('./log/' + str(start) + '_accuracy_' + str(accuracy) + '_test.csv', index=True)
