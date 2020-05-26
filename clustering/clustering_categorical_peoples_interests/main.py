@@ -29,7 +29,7 @@ le = preprocessing.LabelEncoder()
 fit_list = y
 le.fit(fit_list)
 y = le.transform(y)
-lables = y
+labels = y
 
 n_samples, n_features = data.shape
 n_clusters = 10
@@ -45,11 +45,11 @@ def bench_k_means(estimator, name, data):
   silhouette_score = metrics.silhouette_score(data, estimator.labels_, metric='euclidean')
   print('%-9s\t%.2fs\t%i\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f\t%.3f'
     % (name, (time() - t0), estimator.inertia_,
-      metrics.homogeneity_score(lables, estimator.labels_),
-      metrics.completeness_score(lables, estimator.labels_),
-      metrics.v_measure_score(lables, estimator.labels_),
-      metrics.adjusted_rand_score(lables, estimator.labels_),
-      metrics.adjusted_mutual_info_score(lables, estimator.labels_),
+      metrics.homogeneity_score(labels, estimator.labels_),
+      metrics.completeness_score(labels, estimator.labels_),
+      metrics.v_measure_score(labels, estimator.labels_),
+      metrics.adjusted_rand_score(labels, estimator.labels_),
+      metrics.adjusted_mutual_info_score(labels, estimator.labels_),
       silhouette_score))
   filename = './model/' + str(start) + '_' + name + '_n_clusters_' + str(n_clusters) + '_silhouette_score_' + str(silhouette_score) + '.sav'
   joblib.dump(estimator, filename)
