@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-*  Filename : recognize.py
-*  Description : 
-*  Created by ngocjr7 on [2020-05-31 16:56]	
-"""
 from __future__ import absolute_import
 
 from tensorflow.keras.models import load_model
