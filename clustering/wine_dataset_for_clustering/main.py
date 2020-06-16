@@ -19,7 +19,7 @@ X = raw_data
 data = scale(X)
 
 n_samples, n_features = data.shape
-n_clusters = 10
+n_clusters = 3
 
 print("n_clusters: %d, \t n_samples %d, \t n_features %d" % (n_clusters, n_samples, n_features))
 
